@@ -1,0 +1,30 @@
+<module name="Checker">
+    <module name="FileLength">
+        <property name="max" value="2000"/>
+    </module>
+
+    <module name="TreeWalker">
+        <module name="ConstantName"/>
+        <module name="LocalFinalVariableName"/>
+        <module name="LocalVariableName"/>
+        <module name="MemberName"/>
+        <module name="MethodName"/>
+        <module name="PackageName"/>
+        <module name="ParameterName"/>
+        <module name="StaticVariableName"/>
+        <module name="TypeName"/>
+
+        <module name="AvoidStarImport"/>
+        <module name="IllegalImport"/>
+        <module name="RedundantImport"/>
+        <module name="UnusedImports"/>
+
+        <module name="MethodLength">
+            <property name="max" value="150"/>
+        </module>
+
+        <module name="ParameterNumber">
+            <property name="max" value="8"/>
+        </module>
+    </module>
+</module>
