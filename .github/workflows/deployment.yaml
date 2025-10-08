@@ -36,11 +36,6 @@ jobs:
           name: checkstyle-reports
           path: build/reports/checkstyle/
           retention-days: 1
-
-  list-collaborators:
-    runs-on: ubuntu-latest
-
-    steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
