@@ -97,6 +97,7 @@ jobs:
             build/libs/*.jar
             build/distributions/*
           retention-days: 1
+      
 
   test:
     name: "Stage 3 - Run Tests"
