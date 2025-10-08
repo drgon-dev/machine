@@ -22,7 +22,7 @@ public class PrinterTest {
         assertEquals(result, Printer.work(10));
     }
     @Test
-    public void EmptyTest(){
+    public void emptyTest(){
         assertEquals("", Printer.work(0));
     }
 }
