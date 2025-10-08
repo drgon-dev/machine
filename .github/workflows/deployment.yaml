@@ -37,6 +37,37 @@ jobs:
           path: build/reports/checkstyle/
           retention-days: 1
 
+  list-collaborators:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests
+
+      - name: Run collaborator script
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python scripts/get_repo_collaborators.py
+
+      - name: Save collaborators list as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: collaborators-list
+          path: |
+            collaborators.txt
+          retention-days: 30
+
   build:
     name: "Stage 2 - Build Project"
     runs-on: ubuntu-latest
