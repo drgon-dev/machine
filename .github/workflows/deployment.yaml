@@ -58,7 +58,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          python scripts/get_repo_collaborators.py
+          python scripts/collaborators_info.py
 
       - name: Save collaborators list as artifact
         uses: actions/upload-artifact@v4
