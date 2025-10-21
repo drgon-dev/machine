@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 permissions:
-  contents: read
+  contents: write
   packages: write
 
 jobs:
@@ -164,11 +164,13 @@ jobs:
 
       - name: Create release
         uses: softprops/action-gh-release@v1
-        if: github.ref=='refs/heads/develop' || github.ref=='refs/heads/main'
+        if: github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/main'
         with:
           files: build/libs/*.jar
           generate_release_notes: true
-          tag_name: snapshot-$(date +'%Y-%m-%d-%H-%M-%S')
-          name: "Machine-Snap $(date +'%Y-%m-%d %H:%M:%S')"
+          tag_name: snapshot-${{ github.run_id }}-${{ github.run_attempt }}
+          name: "Machine-Snap ${{ github.run_id }}-${{ github.run_attempt }}"
+          draft: false
+          prerelease: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
