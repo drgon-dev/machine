@@ -168,5 +168,7 @@ jobs:
         with:
           files: build/libs/*.jar
           generate_release_notes: true
+          tag_name: snapshot-$(date +'%Y-%m-%d-%H-%M-%S')
+          name: "Machine-Snap $(date +'%Y-%m-%d %H:%M:%S')"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
