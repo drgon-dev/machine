@@ -5,6 +5,14 @@ plugins {
     id 'maven-publish'
 }
 
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'org.machine.Main'
+        )
+    }
+}
+
 checkstyle {
     toolVersion = '10.12.5'
     configFile = file("config/checkstyle/checkstyle.xml")
