@@ -58,11 +58,15 @@ repositories {
 }
 
 dependencies {
+
     testImplementation platform('org.junit:junit-bom:5.10.0')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.2'
+    testImplementation 'org.assertj:assertj-swing:3.17.1'
+    testImplementation 'org.assertj:assertj-core:3.24.2'
 }
 
 test {
+    systemProperty 'java.awt.headless', 'false'
     useJUnitPlatform()
     finalizedBy jacocoTestReport
 }
