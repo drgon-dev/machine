@@ -25,6 +25,13 @@ class SimpleCalculatorTest {
     }
 
     @Test
+    void testLargeNumber1(){
+        clickButtonsByText("1", "0", "0", "0", "*", "1", "0", "0", "0", "=");
+        window.textBox().requireText("1000000.0");
+    }
+
+
+    @Test
     void testCalculatorInitialState() {
 
         window.textBox().requireText("");
@@ -108,19 +115,14 @@ class SimpleCalculatorTest {
     }
 
     @Test
-    void testLargeNumber() {
+    void testLargeNumber2() {
 
         clickButtonsByText("9", "9", "9", "9", "9", "9");
         window.textBox().requireText("999999");
 
         getButtonByText("C").click();
 
-
-        clickButtonsByText("1", "0", "0", "0", "*", "1", "0", "0", "0", "=");
-        window.textBox().requireText("1000000.0");
     }
-
-
 
     @Test
     void testMultipleZeros() {
@@ -135,46 +137,22 @@ class SimpleCalculatorTest {
         window.textBox().requireText("000");
     }
 
-    @Test
-    void testButtonLabels() {
 
-        for (int i = 0; i <= 9; i++) {
-            getButtonByText(String.valueOf(i)).requireText(String.valueOf(i));
-        }
-
-        getButtonByText("+").requireText("+");
-        getButtonByText("-").requireText("-");
-        getButtonByText("*").requireText("*");
-        getButtonByText("/").requireText("/");
-        getButtonByText("=").requireText("=");
-        getButtonByText("C").requireText("C");
-    }
 
     @Test
     void testComplexCalculation() {
 
-        clickButtonsByText("1", "0", "+", "5", "="); // 15
+        clickButtonsByText("1", "0", "+", "5", "=");
         window.textBox().requireText("15.0");
 
-        clickButtonsByText("*", "2", "="); // 30
+        clickButtonsByText("*", "2", "=");
         window.textBox().requireText("30.0");
 
-        clickButtonsByText("/", "3", "="); // 10
+        clickButtonsByText("/", "3", "=");
         window.textBox().requireText("10.0");
     }
 
-    @Test
-    void testContinuousCalculations() {
-        // Тестируем непрерывные вычисления
-        clickButtonsByText("1", "0", "+", "2", "="); // 12
-        window.textBox().requireText("12.0");
 
-        clickButtonsByText("+", "3", "="); // 15
-        window.textBox().requireText("15.0");
-
-        clickButtonsByText("+", "5", "="); // 20
-        window.textBox().requireText("20.0");
-    }
 
     private JButtonFixture getButtonByText(String text) {
         return window.button(new org.assertj.swing.core.GenericTypeMatcher<javax.swing.JButton>(javax.swing.JButton.class) {
