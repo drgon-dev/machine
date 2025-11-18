@@ -5,3 +5,6 @@
 
 Python скрипт находится в scripts/collaborators_info.py
 
+ui тесты включены в этап с юнит тестированием
+
+к репозиторию подлючен github projects
