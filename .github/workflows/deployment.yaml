@@ -2,7 +2,7 @@ name: Java Gradle Pipeline
 
 on:
   push:
-    branches: [ main, develop, swagger ]
+    branches: [ main, develop ]
   pull_request:
     branches: [ main ]
 
