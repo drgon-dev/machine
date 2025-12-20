@@ -1,5 +1,7 @@
 # machine
-Реализовали классы Printer и StringSummer, а также pipeline (.github/workflows/deployment.yaml). 
+Реализовали классы Printer и StringSummer, а также ![pipeline](.github/workflows/deployment.yaml). 
+
+![результаты работы пайплайна](results.png)
 
 Все настройки сборки проекта в build.gradle.
 
@@ -8,6 +10,11 @@ Python скрипт находится в scripts/collaborators_info.py
 ui тесты включены в этап с юнит тестированием
 
 к репозиторию подлючен [github projects](https://github.com/users/drgon-dev/projects/2)
+
+# ui интеграционные тесты
+
+## ![интеграционные, юнит и ui тесты находятся в папке test](src/test/java/org/machine)
+
 # swagger и фронтенд
 
 ## ![swagger](swagger.yaml)
