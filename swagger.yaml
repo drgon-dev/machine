@@ -1,0 +1,181 @@
+openapi: 3.0.0
+info:
+  title: Спецификация онлайн-библиотеки
+  version: 1.0.0
+  description: 
+
+paths:
+  /books:
+    get:
+      summary: "Метод возвращает массив информции о книгах, добавленных пользователем в измбранное"
+      tags:
+        - Library
+      description: "Метод выполняет SELECT ... FROM .. WHERE USER=имя пользователя"
+      responses:
+        '200':
+          description: "Метод успешно вернул массив книг"
+          content: 
+            application/json: 
+              schema: 
+                $ref: '#/components/schemas/BookInfoList'
+  
+  
+  /forum/{book_id}:
+    get:
+      summary: "Метод возвращает массив комментариев к книге по её Id"
+      tags:
+        - Discussions
+      operationId: LoadComments
+      parameters: 
+        - name: book_id
+          in: path
+          required: true
+          description: "id книги"
+          schema: 
+            type: array
+            items: 
+              $ref: '#/components/schemas/BookInfoList'
+      description: "Метод выполняет берет из таблицы комментариев все где id книги = заданному"
+      responses:
+        '200':
+          description: "Метод успешно вернул массив комментариев"
+          content: 
+            application/json: 
+              schema: 
+                $ref: '#/components/schemas/CommentInfoList'
+  
+  
+  /forum:
+    post:
+      summary: "Метод сохраняет комментарий на сервере"
+      tags:
+        - Discussions
+      operationId: saveComment
+      requestBody: 
+        required: true
+        content: 
+          application/json: 
+            schema: 
+              $ref: '#/components/schemas/CommentInfo'
+      responses: 
+        '200':
+          description: "комментарий успешно сохранен"
+          content:
+            application/json: 
+              schema:
+                $ref: '#/components/schemas/CommentInfo'
+  
+  
+  
+  /reader/{book_id}/{page_number}:
+    get:
+      summary: "Метод возвращает текст страницы книги по её номеру"
+      tags:
+        - Reading
+      operationId: LoadBookContent
+      parameters: 
+        - name: book_id
+          in: path
+          required: true
+          description: "id книги"
+          schema: 
+            type: integer
+        - name: page_number
+          in: path
+          required: true
+          description: "номер страницы"
+          schema: 
+            type: integer  
+      description: "Метод получает текст страницы книги из базы данных"
+      responses:
+        '200':
+          description: "Метод успешно вернул содержимое страницы"
+          content: 
+            application/json: 
+              schema: 
+                $ref: '#/components/schemas/PageContent'
+  
+  
+components:
+  schemas: 
+    UserInfo:
+      type: object
+      properties: 
+        userId:
+          type: integer
+          example: 4
+        avatar_url:
+          type: integer
+          example: "https://ada3rrwwwr3"
+        userName:
+          type: string
+          example: "Pasha"
+    
+    CommentInfoList:
+      type: object
+      properties:
+        listSize:
+          type: integer
+          example: 10
+        items:
+          type: array
+          items: 
+            $ref: '#/components/schemas/CommentInfo'
+    
+    CommentInfo:
+      type: object
+      properties: 
+        text:
+          type: string
+          example: "Отличная книга!"
+        userInfo:
+          type: object
+
+    BookInfo:
+      type: object
+      properties: 
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: "Преступление и наказание"
+        year:
+          type: integer
+          example: 1999
+        lastpage:
+          type: integer
+          example: 64  
+        pageCount:
+          type: integer
+          example: 196
+        picture:
+          type: string
+          example: "https://ada3rrwwwr3"
+    
+    BookInfoList:
+      type: object
+      properties:
+        listSize:
+          type: integer
+          example: 10
+        items:
+          type: array
+          items: 
+            $ref: "#/components/schemas/BookInfo"
+    
+    PageContent:  
+      type: object
+      properties:
+        bookId:
+          type: integer
+          example: 1
+        pageNumber:
+          type: integer
+          example: 64
+        content:
+          type: string
+          example: "Текст страницы книги..."
+        totalPages:
+          type: integer
+          example: 196
